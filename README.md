@@ -1,0 +1,1 @@
+Foi utilizado Python 3.8 e Flask 1.1.1.
