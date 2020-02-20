@@ -39,7 +39,10 @@ def numero(num):
         if str(num)[1:4] == '000': #x000
             return um_a_dezenove[num // 1000] + ' mil'
         elif str(num)[2:4] == '00': #xx00
-            return um_a_dezenove[num // 1000] + ' mil e ' + centenas[(num - (int(str(num)[:1]) * 1000)) // 100 - 1]
+            if str(num)[1:2] == '1':
+                return um_a_dezenove[num // 1000] + ' mil e cem'
+            else:
+                return um_a_dezenove[num // 1000] + ' mil e ' + centenas[(num - (int(str(num)[:1]) * 1000)) // 100 - 1]
         elif str(num)[1:2] == '0' and str(num)[2:3] != '0' and str(num)[3:4] == '0': #x0x0
             return um_a_dezenove[num // 1000] + ' mil e ' + dezenas[(num - (int(str(num)[:1]) * 1000)) // 10 - 1]
         elif str(num)[1:3] == '00': #x00x
@@ -59,32 +62,38 @@ def numero(num):
     elif num < 100000:
         if str(num)[1:5] == '0000': #x0000:
             return dezenas[num // 10000 - 1] + ' mil'
-        #elif str(num)[2:5] == '000': #xx000
-        #    return 
+        elif str(num)[2:5] == '000': #xx000
+            if int(str(num)[:2]) < 20:
+                return um_a_dezenove[num // 1000] + ' mil'
+            else:
+                return dezenas[(int(str(num)[0:2])) // 10 - 1] + ' e ' + um_a_dezenove[(int(str(num)[0:2])) % 10] + ' mil'
+        elif str(num)[1:2] == '0' and str(num)[3:5] == '00': #x0x00
+            if str(num)[2:3] == '1':
+                return dezenas[int(str(num)[:1]) // 10000] + ' mil e cem'
+            else:
+                return dezenas[int(str(num)[:1]) // 10000] + ' mil e ' + centenas[int(str(num)[2:3]) - 1]
+        elif str(num)[1:3] == '00' and str(num)[4:5] == '0': #x00x0
+            return dezenas[num // 10000 - 1] + ' mil e ' + dezenas[int(str(num)[3:4]) - 1]
+        elif str(num)[1:4] == '000': #x000x
+            return dezenas[num // 10000 - 1] + ' mil e ' + um_a_dezenove[int(str(num)[4:5])]
+        elif str(num)[3:5] == '00': #xxx00
+            if int(str(num)[0:2]) < 20 and str(num)[2:3] == '1':
+                return um_a_dezenove[int(str(num)[0:2])] + ' mil e cem'
+            elif int(str(num)[0:2]) < 20 and str(num)[2:3] != '1':
+                return um_a_dezenove[int(str(num)[0:2])] + ' mil e ' + centenas[int(str(num)[2:3]) - 1]
+            elif int(str(num)[0:2]) >= 20 and str(num)[2:3] == '1':
+                return dezenas[int(str(num)[:1])] + ' e ' + um_a_dezenove[int(str(num)[1:2])] + ' mil e cem'
+            elif int(str(num)[0:2]) >= 20 and str(num)[2:3] != '1':
+                return dezenas[int(str(num)[:1])] + ' e ' + um_a_dezenove[int(str(num)[1:2])] + ' mil e' + \
+                    centenas[int(str(num)[2:3])]
     else:
         return 'Escreva um número de 0 a 9999'
 
-'''
-print(numero(0))
-print(numero(2))
-print(numero(11))
-print(numero(99))
-print(numero(100))
-print(numero(200))
-print(numero(220))
-print(numero(221))
-print(numero(999))
-print(numero(1020))
-print(numero(2040))
-print(numero(2000))
-print(numero(2200))
-print(numero(2001))
-print(numero(2210))
-print(numero(2011))
-print(numero(2020))
-print(numero(2021))
-print(numero(2021))
-print(numero(9999))
-print(numero(1999))
-print(numero(10000))
-'''
+print(numero(20050))
+print(numero(12000))
+print(numero(19000))
+print(numero(92000))
+print(numero(19100))
+print(numero(19200))
+
+print('12345'[0:2])
