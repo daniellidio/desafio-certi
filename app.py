@@ -3,7 +3,7 @@ from numeros import numero
 
 app = Flask(__name__)
 
-@app.route('/<int:entrada>', methods=['GET'])
+@app.route('/<string:entrada>', methods=['GET'])
 def response(entrada):
     resultado = numero(entrada)
     return jsonify(resultado=resultado)
