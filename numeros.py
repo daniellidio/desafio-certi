@@ -7,13 +7,14 @@ um_a_dezenove = [
 
 dezenas = [
     'dez', 'vinte', 'trinta', 'quarenta', 'cinquenta', 'sessenta',
-    'setenta','oitenta', 'noventa'
+    'setenta', 'oitenta', 'noventa'
 ]
 
 centenas = [
     'cento', 'duzentos', 'trezentos', 'quatrocentos', 'quinhentos',
     'seiscentos', 'setecentos', 'oitocentos', 'novecentos'
 ]
+
 
 def numero(num):
     num = int(num)
